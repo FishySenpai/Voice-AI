@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+.custom-link {
+  text-decoration: none;
+  color: inherit;
+  /* Add any other custom styles you want here */
+}

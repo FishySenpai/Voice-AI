@@ -1,4 +1,5 @@
-import * as React from "react";
+import react, { useEffect, useState } from "react";
+import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,12 +9,9 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -25,19 +23,71 @@ const customTheme = createTheme({
   },
 });
 
-const Login=()=> {
-  const handleSubmit = (event) => {
+const Login = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [loginStatus, setLoginStatus] = useState("");
+  axios.defaults.withCredentials = true;
+  const checkLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      if (response) {
+        console.log(response);
+        const responseData = await response.json();
+        console.log(responseData);
+        if (responseData.loggedIn == true) {
+          setLoginStatus(responseData.user.name);
+        } else {
+          console.log("no user");
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    checkLogin();
+  }, []);
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    try {
+      const body = { email, password };
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        credentials: "include",
+      });
+
+      if (response) {
+        console.log(response);
+        const responseData = await response.json();
+        console.log(responseData);
+        if (responseData.name) {
+          // User successfully logged in
+          setLoginStatus(responseData.name);
+        } else if (responseData.message) {
+          // Handle the case where there's a message from the server
+          setLoginStatus(responseData.message);
+        }
+      } else {
+        // Handle non-2xx HTTP status codes here, if needed
+        console.error(`HTTP Error: ${response.status}`);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <ThemeProvider theme={customTheme}>
       <Container component="main" maxWidth="xs">
+        <div>{loginStatus}</div>
         <CssBaseline />
         <Box
           sx={{
@@ -47,8 +97,7 @@ const Login=()=> {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -59,6 +108,9 @@ const Login=()=> {
             sx={{ mt: 1 }}
           >
             <TextField
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
               margin="normal"
               required
               fullWidth
@@ -69,6 +121,9 @@ const Login=()=> {
               autoFocus
             />
             <TextField
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               margin="normal"
               required
               fullWidth
@@ -107,5 +162,5 @@ const Login=()=> {
       </Container>
     </ThemeProvider>
   );
-}
-export default Login
+};
+export default Login;

@@ -1,4 +1,4 @@
-import * as React from "react";
+import react, {useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,13 +25,24 @@ const customTheme = createTheme({
 });
 
 const Register =()=> {
-  const handleSubmit = (event) => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(name, email, password);
+    try {
+      const body = { name, email, password };
+      const response = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -46,9 +57,7 @@ const Register =()=> {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
@@ -59,8 +68,11 @@ const Register =()=> {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                   autoComplete="given-name"
                   name="Name"
                   required
@@ -70,9 +82,12 @@ const Register =()=> {
                   autoFocus
                 />
               </Grid>
-              
+
               <Grid item xs={12}>
                 <TextField
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   required
                   fullWidth
                   id="email"
@@ -83,6 +98,9 @@ const Register =()=> {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   required
                   fullWidth
                   name="password"
@@ -92,7 +110,6 @@ const Register =()=> {
                   autoComplete="new-password"
                 />
               </Grid>
-              
             </Grid>
             <Button
               type="submit"

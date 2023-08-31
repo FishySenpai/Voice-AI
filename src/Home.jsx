@@ -10,18 +10,32 @@ const Home = () => {
   const [description, setDescription] = useState();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const all = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/all");
-      const jsonData = await res.json();
-      console.log(jsonData)
-      setData(jsonData);
-      setLoading(false);
-      console.log(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+ const [audioSources, setAudioSources] = useState({});
+
+ const all = async () => {
+   try {
+     const res = await fetch("http://localhost:5000/all");
+     const jsonData = await res.json();
+     console.log(jsonData);
+     setData(jsonData);
+     setLoading(false);
+
+     // Calculate audio sources and store them
+     const sources = {};
+     jsonData.forEach((item) => {
+       if (item.audioData && item.audioData.data) {
+         sources[item.text_id] = bufferToDataUrl(
+           item.audioData.data,
+           "audio/mpeg"
+         );
+       }
+     });
+     setAudioSources(sources);
+   } catch (err) {
+     console.error(err);
+   }
+ };
+
   useEffect(() => {
     all();
   }, []);
@@ -65,15 +79,18 @@ const Home = () => {
       console.log(err);
     }
   };
+  
   return (
     <div>
-      <input
-        type="text"
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <button onClick={Fetch}>Enter</button>
+      <div>
+        <input
+          type="text"
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+        <button onClick={Fetch}>Enter</button>
+      </div>
       <div>
         {loading ? (
           <p>Loading...</p>
@@ -99,11 +116,16 @@ const Home = () => {
                     <TableCell align="right">{item.description}</TableCell>
                     <TableCell>
                       <audio controls>
-                        <source
-                          src={bufferToDataUrl(item.audio.data, "audio/mpeg")}
-                          type="audio/mpeg"
-                        />
-                        Your browser does not support the audio element.
+                        {audioSources[item.text_id] ? (
+                          <source
+                            src={audioSources[item.text_id]}
+                            type="audio/mpeg"
+                          />
+                        ) : (
+                          <p>
+                            Your browser does not support the audio element.
+                          </p>
+                        )}
                       </audio>
                     </TableCell>
 

@@ -5,13 +5,14 @@ import Home from './Home'
 import Login from './Login';
 import Register from './Register';
 import DrawerAppBar from "./Navbar"
+import User from './User';
 function App() {
 
   return (
     <>
       <div className="App">
         <Router>
-          <DrawerAppBar/>
+          <DrawerAppBar />
           <Routes>
             <Route
               path="/"
@@ -34,6 +35,14 @@ function App() {
               element={
                 <>
                   <Register />
+                </>
+              }
+            />{" "}
+            <Route
+              path="/user"
+              element={
+                <>
+                  <User />
                 </>
               }
             />

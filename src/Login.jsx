@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -28,30 +28,6 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [loginStatus, setLoginStatus] = useState("");
   axios.defaults.withCredentials = true;
-  const checkLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/login", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      if (response) {
-        console.log(response);
-        const responseData = await response.json();
-        console.log(responseData);
-        if (responseData.loggedIn == true) {
-          setLoginStatus(responseData.user.name);
-        } else {
-          console.log("no user");
-        }
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    checkLogin();
-  }, []);
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,7 +63,7 @@ const Login = () => {
   return (
     <ThemeProvider theme={customTheme}>
       <Container component="main" maxWidth="xs">
-        <div>{loginStatus}</div>
+        
         <CssBaseline />
         <Box
           sx={{

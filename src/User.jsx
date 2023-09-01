@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,61 +7,60 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-const Home = () => {
+const User = () => {
   const [description, setDescription] = useState();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
- const [audioSources, setAudioSources] = useState({});
-const [loginStatus, setLoginStatus] = useState("");
-axios.defaults.withCredentials = true;
-const checkLogin = async () => {
-  try {
-    const response = await fetch("http://localhost:5000/login", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    if (response) {
-      console.log(response);
-      const responseData = await response.json();
-      console.log(responseData);
-      if (responseData.loggedIn == true) {
+  const [audioSources, setAudioSources] = useState({});
+  const [loginStatus, setLoginStatus] = useState("");
+  axios.defaults.withCredentials = true;
+  const checkLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      if (response) {
+        console.log(response);
+        const responseData = await response.json();
         console.log(responseData);
-        setLoginStatus(responseData.name);
-      } else {
-        console.log("no user");
+        if (responseData.loggedIn == true) {
+          setLoginStatus(responseData);
+        } else {
+          console.log("no user");
+        }
       }
+    } catch (err) {
+      console.error(err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-};
-useEffect(() => {
-  checkLogin();
-}, []);
- const all = async () => {
-   try {
-     const res = await fetch("http://localhost:5000/all");
-     const jsonData = await res.json();
-     console.log(jsonData);
-     setData(jsonData);
-     setLoading(false);
+  };
+  useEffect(() => {
+    checkLogin();
+  }, []);
+  const all = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/all");
+      const jsonData = await res.json();
+      console.log(jsonData);
+      setData(jsonData);
+      setLoading(false);
 
-     // Calculate audio sources and store them
-     const sources = {};
-     jsonData.forEach((item) => {
-       if (item.audioData && item.audioData.data) {
-         sources[item.text_id] = bufferToDataUrl(
-           item.audioData.data,
-           "audio/mpeg"
-         );
-       }
-     });
-     setAudioSources(sources);
-   } catch (err) {
-     console.error(err);
-   }
- };
+      // Calculate audio sources and store them
+      const sources = {};
+      jsonData.forEach((item) => {
+        if (item.audioData && item.audioData.data) {
+          sources[item.text_id] = bufferToDataUrl(
+            item.audioData.data,
+            "audio/mpeg"
+          );
+        }
+      });
+      setAudioSources(sources);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     all();
@@ -75,13 +74,11 @@ useEffect(() => {
     const blob = new Blob([uint8Array], { type: mimeType });
 
     // Create a data URL from the Blob
-    console.log(URL.createObjectURL(blob))
+    console.log(URL.createObjectURL(blob));
     return URL.createObjectURL(blob);
   }
 
-
   const Delete = async (id) => {
-
     try {
       const response = await fetch(`http://localhost:5000/delete/${id}`, {
         method: "DELETE",
@@ -94,9 +91,9 @@ useEffect(() => {
 
   const Fetch = async () => {
     console.log(description);
-    let id = 2;
+    const id = loginStatus.id;
     try {
-      const body = { description, id};
+      const body = { description, id };
       const response = await fetch("http://localhost:5000/text", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -107,10 +104,10 @@ useEffect(() => {
       console.log(err);
     }
   };
-  
+
   return (
     <div>
-      <div>{loginStatus}</div>
+      <div>{loginStatus.name}</div>
       <div>
         <input
           type="text"
@@ -174,4 +171,4 @@ useEffect(() => {
   );
 };
 
-export default Home;
+export default User;

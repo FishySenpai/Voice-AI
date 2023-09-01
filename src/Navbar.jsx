@@ -83,6 +83,13 @@ function DrawerAppBar(props) {
                   </Link>
                 </ListItemButton>
               </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  <Link to="/user" className="custom-link">
+                    <ListItemText primary="User" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
             </List>
           </Box>
         </Toolbar>

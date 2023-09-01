@@ -35,12 +35,9 @@ const User = () => {
       console.error(err);
     }
   };
-  useEffect(() => {
-    checkLogin();
-  }, []);
-  const all = async () => {
+  const all = async (id) => {
     try {
-      const res = await fetch("http://localhost:5000/all");
+      const res = await fetch(`http://localhost:5000/user/${id}`);
       const jsonData = await res.json();
       console.log(jsonData);
       setData(jsonData);
@@ -50,7 +47,7 @@ const User = () => {
       const sources = {};
       jsonData.forEach((item) => {
         if (item.audioData && item.audioData.data) {
-          sources[item.text_id] = bufferToDataUrl(
+          sources[item.id] = bufferToDataUrl(
             item.audioData.data,
             "audio/mpeg"
           );
@@ -61,11 +58,18 @@ const User = () => {
       console.error(err);
     }
   };
-
   useEffect(() => {
-    all();
+    checkLogin();
+    if (loginStatus) {
+      all(loginStatus.id);
+    }
   }, []);
 
+   useEffect(() => {
+     if (loginStatus.id) {
+       all(loginStatus.id);
+     }
+   }, [loginStatus]);
   function bufferToDataUrl(buffer, mimeType) {
     // Convert the Buffer to a Uint8Array
     const uint8Array = new Uint8Array(buffer);
@@ -80,7 +84,7 @@ const User = () => {
 
   const Delete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/delete/${id}`, {
+      const response = await fetch(`http://localhost:5000/user/delete/${id}`, {
         method: "DELETE",
       });
       console.log(response);
@@ -131,20 +135,20 @@ const User = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((item, index) => (
+                {data?.map((item, index) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {item.text_id}
+                      {item.id}
                     </TableCell>
                     <TableCell align="right">{item.description}</TableCell>
                     <TableCell>
                       <audio controls>
-                        {audioSources[item.text_id] ? (
+                        {audioSources[item.id] ? (
                           <source
-                            src={audioSources[item.text_id]}
+                            src={audioSources[item.id]}
                             type="audio/mpeg"
                           />
                         ) : (
@@ -156,7 +160,7 @@ const User = () => {
                     </TableCell>
 
                     <TableCell align="right">
-                      <button onClick={() => Delete(item.text_id)}>
+                      <button onClick={() => Delete(item.id)}>
                         Delete
                       </button>
                     </TableCell>

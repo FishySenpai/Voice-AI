@@ -45,3 +45,33 @@
   color: inherit;
   /* Add any other custom styles you want here */
 }
+.flex{
+  display: flex;
+}
+.flex-row{
+  flex-direction: row;
+}
+.px{
+padding: 20px;
+}
+.pr{
+  padding-right: 20px;
+}
+.mr{
+  margin-right: 10px;
+}
+.width{
+  width: 600px;
+}
+.bg{
+  background-color: gray;
+}
+.border{
+  border-radius: 20%;
+  border-color: gray;
+  background-color: gray;
+  color: white;
+  font-family: monospace;
+  font-weight: 500;
+  padding: 4px;
+}

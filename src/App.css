@@ -75,3 +75,28 @@ padding: 20px;
   font-weight: 500;
   padding: 4px;
 }
+.btn-clr{
+  background-color: white;
+}
+.relative{
+  position: relative;
+}
+.position-dropdown{
+  position: absolute;
+  top: 80px;
+  background-color: white;
+
+  z-index: 20;
+}
+.clr{
+  color: black;
+}
+.align-left{
+  width: 100%;
+  display: block;
+align-items: start;
+}
+.height{
+  height: 400px;
+  overflow-x: auto;
+}

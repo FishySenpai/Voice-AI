@@ -6,6 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import DrawerAppBar from "./Navbar"
 import User from './User';
+import PublicAudio from './PublicAudio';
 function App() {
 
   return (
@@ -37,12 +38,20 @@ function App() {
                   <Register />
                 </>
               }
-            />{" "}
+            />
             <Route
               path="/user"
               element={
                 <>
                   <User />
+                </>
+              }
+            />
+            <Route
+              path="/public"
+              element={
+                <>
+                  <PublicAudio />
                 </>
               }
             />

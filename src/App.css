@@ -100,3 +100,10 @@ align-items: start;
   height: 400px;
   overflow-x: auto;
 }
+.flex-col{
+  flex-direction: column;
+}
+.text-large{
+  font-size: xx-large;
+  color: black;
+}

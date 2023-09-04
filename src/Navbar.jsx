@@ -71,6 +71,13 @@ function DrawerAppBar(props) {
               </ListItem>
               <ListItem disablePadding>
                 <ListItemButton sx={{ textAlign: "center" }}>
+                  <Link to="/public" className="custom-link">
+                    <ListItemText primary="Public" />
+                  </Link>
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton sx={{ textAlign: "center" }}>
                   <Link to="/login" className="custom-link">
                     <ListItemText primary="Login" />
                   </Link>

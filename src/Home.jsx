@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { TextField,  } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import AudioControl from "./AudioControl";
 import { useNavigate } from "react-router-dom";
+import test from "./assets/test.mp3";
+import storedVoices from "./assets/storedVoices.json"
 const Home = () => {
   const [description, setDescription] = useState();
   const [loginStatus, setLoginStatus] = useState("");
-  const [voices, setVoices] = useState([]);
-  const [selectedVoice, setSelectedVoice] = useState();
+  const [voices, setVoices] = useState(storedVoices);
+  const [selectedVoice, setSelectedVoice] = useState(storedVoices[0]);
   const [selectVoice, setSelectVoice] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
   const [epublic, setpublic] = useState("public");
@@ -58,15 +60,15 @@ const Home = () => {
     }
   };
 
-  const handleClick =()=>{
-    if(loginStatus){
-setPrivate(epublic);
-setpublic(eprivate);
-setTogglePrivate(!togglePrivate);
+  const handleClick = () => {
+    if (loginStatus) {
+      setPrivate(epublic);
+      setpublic(eprivate);
+      setTogglePrivate(!togglePrivate);
     } else {
-      navigate("/login")
+      navigate("/login");
     }
-  }
+  };
   return (
     <div>
       <div>
@@ -77,61 +79,69 @@ setTogglePrivate(!togglePrivate);
         <div className="px width">
           {console.log(selectedVoice)}
           {selectedVoice ? (
-            <div className="flex flex-row">
+            <div className="flex flex-row box-shadow">
               <div className="pr">
                 <AudioControl audioSrc={selectedVoice.preview_url} />
               </div>
               <div className="pr">{selectedVoice.name}</div>
-              <div className="flex flex-row">
-                <div className="pr mr border">
-                  {selectedVoice.labels.accent}
-                </div>
-                <div className="pr mr border">{selectedVoice.labels.age}</div>
-                <div className="pr mr border">
-                  {selectedVoice.labels.gender}
-                </div>
-                <div className="pr mr border">
-                  {selectedVoice.labels.description}
-                </div>
+
+              <div className="pr mr border btn-h">
+                {selectedVoice.labels.accent}
               </div>
-              <button className="btn-clr" onClick={dropDown}>
+              <div className="pr mr border btn-h">
+                {selectedVoice.labels.age}
+              </div>
+              <div className="pr mr border btn-h">
+                {selectedVoice.labels.gender}
+              </div>
+              <div className="pr mr border btn-h">
+                {selectedVoice.labels.description}
+              </div>
+
+              <button className="reset-btn" onClick={dropDown}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  height="30px"
-                  viewBox="0 0 320 512"
+                  height="25px"
+                  viewBox="0 0 512 512"
                 >
-                  <path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
+                  <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
                 </svg>
               </button>
             </div>
           ) : null}
 
           {selectVoice ? (
-            <div className="position-dropdown height">
+            <ul className="position-dropdown height ulist">
               {voices?.slice(0, 30).map((voice) => (
-                <button
-                  onClick={() => {
-                    setSelectedVoice(voice);
-                  }}
-                  className="btn-clr align-left"
-                >
-                  <div className="flex flex-row ">
-                    <div className="pr">
-                      <AudioControl audioSrc={voice.preview_url} />
-                    </div>
-                    <div className="pr clr">{voice.name}</div>
-                    <div className="flex flex-row">
-                      <div className="pr mr border">{voice.labels.accent}</div>
-                      <div className="pr mr border">{voice.labels.age}</div>
-                      <div className="pr mr border">{voice.labels.gender}</div>
-                      <div className="pr mr border">
-                        {voice.labels.description}
+                <li className="list" key={voice.voice_id}>
+                  <button
+                    onClick={() => {
+                      setSelectedVoice(voice);
+                    }}
+                    className="btn-clr align-left"
+                  >
+                    <div className="flex flex-row ">
+                      <div className="pr">
+                        <AudioControl audioSrc={voice.preview_url} />
+                      </div>
+                      <div className="pr clr">{voice.name}</div>
+                      <div className="flex flex-row">
+                        <div className="pr mr border">
+                          {voice.labels.accent}
+                        </div>
+                        <div className="pr mr border">{voice.labels.age}</div>
+                        <div className="pr mr border">
+                          {voice.labels.gender}
+                        </div>
+                        <div className="pr mr border">
+                          {voice.labels.description}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                </li>
               ))}
-            </div>
+            </ul>
           ) : null}
           <div className="flex flex-col">
             <button
@@ -142,28 +152,30 @@ setTogglePrivate(!togglePrivate);
               {epublic}
             </button>
             {togglePrivate ? (
-              <button
-                onClick={handleClick}
-              >
-                {eprivate}
-              </button>
+              <button onClick={handleClick}>{eprivate}</button>
             ) : null}
           </div>
         </div>
       </div>
       <div>{loginStatus}</div>
       <div className="">
-        <textarea
-        className="text-large"
-          style={{ width: "600px", height: "500px" }} // Set the desired width and height
-          placeholder="Enter text"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-        />
-        <button onClick={Fetch}>Enter</button>
+        <div>
+          <textarea
+            className="text-large"
+            style={{ width: "600px", height: "500px" }} // Set the desired width and height
+            placeholder="Enter text"
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+        </div>
+        <Button variant="contained" color="secondary" onClick={Fetch}>
+          Enter
+        </Button>
       </div>
-      <div></div>
+      <div>
+        <audio src={test} controls></audio>
+      </div>
     </div>
   );
 };

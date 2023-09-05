@@ -58,10 +58,10 @@ padding: 20px;
   padding-right: 20px;
 }
 .mr{
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .width{
-  width: 600px;
+  width: 650px;
 }
 .bg{
   background-color: gray;
@@ -83,7 +83,8 @@ padding: 20px;
 }
 .position-dropdown{
   position: absolute;
-  top: 80px;
+  top: 40px;
+  left: 0px;
   background-color: white;
 
   z-index: 20;
@@ -106,4 +107,33 @@ align-items: start;
 .text-large{
   font-size: xx-large;
   color: black;
+}
+
+.reset-btn{
+  all: initial;
+  margin-left: 105px;
+  margin-bottom: 4px;
+}
+.reset-btn:focus{
+  outline: none;
+}
+.btn-h{
+  height: 35px;
+}
+.list{
+  
+  all: initial;
+}
+.ulist{
+  
+  padding-inline-start: 0;
+  overflow-x: hidden;
+
+}
+.box-shadow {
+  box-shadow: 0px 0px 0px 1px rgba(128, 128, 128, 0.5); /* Gray color with 50% opacity */
+  border-radius: 10px;
+  padding: 2px;
+  padding-left: 20px;
+  margin-bottom: 4px;
 }

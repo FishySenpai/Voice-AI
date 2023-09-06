@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, CircularProgress } from "@mui/material";
 import AudioControl from "./AudioControl";
 import { useNavigate } from "react-router-dom";
 import test from "./assets/test.mp3";
@@ -15,6 +15,8 @@ const Home = () => {
   const [epublic, setpublic] = useState("public");
   const [eprivate, setPrivate] = useState("private");
   const [togglePrivate, setTogglePrivate] = useState(false);
+  const [userAudio, setUserAudio] = useState();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
@@ -22,6 +24,7 @@ const Home = () => {
     setSelectVoice(!selectVoice);
   };
   const Fetch = async () => {
+    setLoading(true);
     console.log(description);
     let voiceId = selectedVoice?.voice_id;
     let id = null;
@@ -32,33 +35,26 @@ const Home = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(response);
+      const jsonData = await response.json();
+      bufferToDataUrl(jsonData.data, "audio/mpeg");
+      console.log(jsonData);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
-  const Voices = async () => {
-    try {
-      const response = await fetch("https://api.elevenlabs.io/v1/voices", {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          "xi-api-key": "2a0e3af64ea95b70b4c92f05411c03c5",
-        },
-      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+  function bufferToDataUrl(buffer, mimeType) {
+    // Convert the Buffer to a Uint8Array
+    const uint8Array = new Uint8Array(buffer);
 
-      const data = await response.json();
-      console.log(data);
-      setVoices(data.voices); // Assuming the response is JSON data
-      setSelectedVoice(data.voices[0]);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+    // Create a Blob from the Uint8Array
+    const blob = new Blob([uint8Array], { type: mimeType });
+
+    // Create a data URL from the Blob
+    console.log(URL.createObjectURL(blob));
+   setUserAudio(URL.createObjectURL(blob))
+  }
 
   const handleClick = () => {
     if (loginStatus) {
@@ -71,9 +67,6 @@ const Home = () => {
   };
   return (
     <div>
-      <div>
-        <button onClick={Voices}>Get voices</button>
-      </div>
       {console.log(voices)}
       <div className="relative">
         <div className="px width">
@@ -174,7 +167,13 @@ const Home = () => {
         </Button>
       </div>
       <div>
-        <audio src={test} controls></audio>
+        {loading && !userAudio ? <CircularProgress /> : null}
+        {userAudio && !loading ? (
+          <audio controls>
+            <source src={userAudio} type="audio/mpeg" />
+            <p>Your browser does not support the audio element.</p>
+          </audio>
+        ) : null}
       </div>
     </div>
   );

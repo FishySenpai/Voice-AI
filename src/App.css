@@ -137,3 +137,24 @@ align-items: start;
   padding-left: 20px;
   margin-bottom: 4px;
 }
+/* Add this CSS to style the progress bar */
+.progress-bar {
+  width: 100%;
+  height: 8px; /* Adjust the height as needed */
+  background-color: #ccc; /* Background color of the progress bar container */
+  border-radius: 4px; /* Rounded corners for the progress bar */
+}
+
+.progress {
+  height: 100%;
+  background-color: #007bff; /* Color of the progress bar */
+  border-radius: 4px; /* Rounded corners for the progress bar */
+}
+
+.theme{
+  background-color: gray;
+}
+.audio-width{
+  width: 70vw;
+  padding-top: 40px;
+}

@@ -5,6 +5,7 @@ import AudioControl from "./AudioControl";
 import { useNavigate } from "react-router-dom";
 import test from "./assets/test.mp3";
 import storedVoices from "./assets/storedVoices.json"
+import AudioPlayer from "./AudioPlayer";
 const Home = () => {
   const [description, setDescription] = useState();
   const [loginStatus, setLoginStatus] = useState("");
@@ -66,7 +67,7 @@ const Home = () => {
     }
   };
   return (
-    <div>
+    <div >
       {console.log(voices)}
       <div className="relative">
         <div className="px width">
@@ -174,6 +175,9 @@ const Home = () => {
             <p>Your browser does not support the audio element.</p>
           </audio>
         ) : null}
+      </div>
+      <div className="audio-width">
+        <AudioPlayer audioSrc={test} />
       </div>
     </div>
   );

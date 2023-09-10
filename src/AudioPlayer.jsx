@@ -39,9 +39,7 @@ function AudioPlayer({ audioSrc }) {
 
     volumeInputRef.current.addEventListener("wheel", handleScroll);
 
-    return () => {
-      volumeInputRef.current.removeEventListener("wheel", handleScroll);
-    };
+   
   }, []);
 
   const handleTimeUpdate = () => {

@@ -34,11 +34,14 @@ const Register =()=> {
     console.log(name, email, password);
     try {
       const body = { name, email, password };
-      const response = await fetch("http://localhost:5000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "https://raspberry-goldfish-tam.cyclic.app/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       console.log(response);
     } catch (err) {
       console.log(err);

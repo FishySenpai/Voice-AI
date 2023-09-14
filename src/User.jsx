@@ -16,11 +16,14 @@ const User = () => {
   axios.defaults.withCredentials = true;
   const checkLogin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/login", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://raspberry-goldfish-tam.cyclic.app/login",
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
       if (response) {
         console.log(response);
         const responseData = await response.json();
@@ -37,7 +40,9 @@ const User = () => {
   };
   const all = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/user/${id}`);
+      const res = await fetch(
+        `https://raspberry-goldfish-tam.cyclic.app/user/${id}`
+      );
       const jsonData = await res.json();
       console.log(jsonData);
       setData(jsonData);
@@ -84,9 +89,12 @@ const User = () => {
 
   const Delete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/user/delete/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://raspberry-goldfish-tam.cyclic.app/user/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -98,11 +106,14 @@ const User = () => {
     const id = loginStatus.id;
     try {
       const body = { description, id };
-      const response = await fetch("http://localhost:5000/text", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "https://raspberry-goldfish-tam.cyclic.app/text",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       console.log(response);
     } catch (err) {
       console.log(err);

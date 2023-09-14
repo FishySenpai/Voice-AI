@@ -13,11 +13,14 @@ const PublicAudio = () => {
 
   const checkLogin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/login", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://raspberry-goldfish-tam.cyclic.app/login",
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
       if (response) {
         console.log(response);
         const responseData = await response.json();
@@ -38,7 +41,7 @@ const PublicAudio = () => {
   }, []);
   const all = async () => {
     try {
-      const res = await fetch("http://localhost:5000/all");
+      const res = await fetch("https://raspberry-goldfish-tam.cyclic.app/all");
       const jsonData = await res.json();
       console.log(jsonData);
       setData(jsonData);
@@ -78,9 +81,12 @@ const PublicAudio = () => {
 
   const Delete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/delete/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://raspberry-goldfish-tam.cyclic.app/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       console.log(response);
     } catch (err) {
       console.log(err);

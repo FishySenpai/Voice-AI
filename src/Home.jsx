@@ -31,11 +31,14 @@ const Home = () => {
     let id = null;
     try {
       const body = { description, id, voiceId };
-      const response = await fetch("http://localhost:5000/text", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "https://raspberry-goldfish-tam.cyclic.app/text",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       const jsonData = await response.json();
       bufferToDataUrl(jsonData.data, "audio/mpeg");
       console.log(jsonData);

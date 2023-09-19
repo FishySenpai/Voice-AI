@@ -17,7 +17,7 @@ const User = () => {
   const checkLogin = async () => {
     try {
       const response = await fetch(
-        "https://raspberry-goldfish-tam.cyclic.app/login",
+        "http://localhost:5000/login",
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -41,7 +41,7 @@ const User = () => {
   const all = async (id) => {
     try {
       const res = await fetch(
-        `https://raspberry-goldfish-tam.cyclic.app/user/${id}`
+        `http://localhost:5000/user/${id}`
       );
       const jsonData = await res.json();
       console.log(jsonData);
@@ -90,7 +90,7 @@ const User = () => {
   const Delete = async (id) => {
     try {
       const response = await fetch(
-        `https://raspberry-goldfish-tam.cyclic.app/user/delete/${id}`,
+        `http://localhost:5000/user/delete/${id}`,
         {
           method: "DELETE",
         }
@@ -102,19 +102,21 @@ const User = () => {
   };
 
   const Fetch = async () => {
+    setLoading(true);
     console.log(description);
-    const id = loginStatus.id;
+    let voiceId = "21m00Tcm4TlvDq8ikWAM";
+    let id = loginStatus.id;
     try {
-      const body = { description, id };
-      const response = await fetch(
-        "https://raspberry-goldfish-tam.cyclic.app/text",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
-      console.log(response);
+      const body = { description, id, voiceId };
+      const response = await fetch("http://localhost:5000/text", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const jsonData = await response.json();
+      bufferToDataUrl(jsonData.data, "audio/mpeg");
+      console.log(jsonData);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }

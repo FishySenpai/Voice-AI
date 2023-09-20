@@ -67,7 +67,7 @@ const Home = () => {
     }
   };
   return (
-    <div >
+    <div>
       {console.log(voices)}
       <div className="relative">
         <div className="px width">
@@ -111,6 +111,7 @@ const Home = () => {
                   <button
                     onClick={() => {
                       setSelectedVoice(voice);
+                      
                     }}
                     className="btn-clr align-left"
                   >
@@ -170,14 +171,10 @@ const Home = () => {
       <div>
         {loading && !userAudio ? <CircularProgress /> : null}
         {userAudio && !loading ? (
-          <audio controls>
-            <source src={userAudio} type="audio/mpeg" />
-            <p>Your browser does not support the audio element.</p>
-          </audio>
+          <div className="audio-width">
+            <AudioPlayer audioSrc={userAudio} />
+          </div>
         ) : null}
-      </div>
-      <div className="audio-width">
-        <AudioPlayer audioSrc={test} />
       </div>
     </div>
   );

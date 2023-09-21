@@ -107,33 +107,35 @@ const Home = () => {
           {selectVoice ? (
             <ul className="position-dropdown height ulist">
               {voices?.slice(0, 30).map((voice) => (
-                <li className="list" key={voice.voice_id}>
-                  <button
-                    onClick={() => {
-                      setSelectedVoice(voice);
-                      
-                    }}
-                    className="btn-clr align-left"
-                  >
-                    <div className="flex flex-row ">
-                      <div className="pr">
-                        <AudioControl audioSrc={voice.preview_url} />
-                      </div>
-                      <div className="pr clr">{voice.name}</div>
-                      <div className="flex flex-row">
-                        <div className="pr mr border">
-                          {voice.labels.accent}
-                        </div>
-                        <div className="pr mr border">{voice.labels.age}</div>
-                        <div className="pr mr border">
-                          {voice.labels.gender}
-                        </div>
-                        <div className="pr mr border">
-                          {voice.labels.description}
-                        </div>
-                      </div>
+                <li className="list " key={voice.voice_id}>
+                  <div className="flex flex-row">
+                    <div className="">
+                      <AudioControl audioSrc={voice.preview_url} />
                     </div>
-                  </button>
+                    <button
+                      onClick={() => {
+                        setSelectedVoice(voice);
+                        dropDown();
+                      }}
+                      className="btn-clr align-left"
+                    >
+                      <div className="flex flex-row ">
+                        <div className="pr clr">{voice.name}</div>
+                        <div className="flex flex-row">
+                          <div className="pr mr border">
+                            {voice.labels.accent}
+                          </div>
+                          <div className="pr mr border">{voice.labels.age}</div>
+                          <div className="pr mr border">
+                            {voice.labels.gender}
+                          </div>
+                          <div className="pr mr border">
+                            {voice.labels.description}
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

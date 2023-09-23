@@ -31,7 +31,7 @@ const Home = () => {
     let id = null;
     try {
       const body = { description, id, voiceId };
-      const response = await fetch("http://localhost:5000/text", {
+      const response = await fetch("http://localhost:5000/createAudio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

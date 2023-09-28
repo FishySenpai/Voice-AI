@@ -33,15 +33,12 @@ const Login = () => {
     event.preventDefault();
     try {
       const body = { email, password };
-      const response = await fetch(
-        "https://raspberry-goldfish-tam.cyclic.app/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-          credentials: "include",
-        }
-      );
+      const response = await fetch("https://raspberry-goldfish-tam.cyclic.app/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        credentials: "include",
+      });
 
       if (response) {
         console.log(response);

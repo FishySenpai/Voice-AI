@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
 import Home from './Home'
-import Login from './Login';
-import Register from './Register';
+import Login from './user/Login';
+import Register from './user/Register';
 import DrawerAppBar from "./Navbar"
-import User from './User';
+import User from './user/User';
 import PublicAudio from './PublicAudio';
 function App() {
 

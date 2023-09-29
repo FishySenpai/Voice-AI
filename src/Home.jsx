@@ -31,7 +31,7 @@ const Home = () => {
     let id = null;
     try {
       const body = { description, id, voiceId };
-      const response = await fetch("http://localhost:5000/createAudio", {
+      const response = await fetch("https://raspberry-goldfish-tam.cyclic.app/createAudio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

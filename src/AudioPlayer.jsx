@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import WaveSurfer from "wavesurfer.js";
+import test from "./assets/test.mp3";
 function AudioPlayer({ audioSrc }) {
   const [audio] = useState(new Audio(audioSrc));
   const [isPlaying, setIsPlaying] = useState(false);
@@ -101,6 +102,12 @@ function AudioPlayer({ audioSrc }) {
   const handleVolumeIconMouseLeave = () => {
     setVolumeSliderVisible(false);
   };
+  const wavesurfer = WaveSurfer.create({
+    container: "#waveform",
+    waveColor: "#4F4A85",
+    progressColor: "#383351",
+    url: {test},
+  });
   return (
     <div className="audio-player relative">
       <div className="flex flex-row">
@@ -125,6 +132,7 @@ function AudioPlayer({ audioSrc }) {
             )}
           </button>
         </div>
+        
         <div ref={progressRef} className="progress-bar" onClick={handleSeek}>
           <div
             className="progress"

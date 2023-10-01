@@ -45,6 +45,9 @@
   color: inherit;
   /* Add any other custom styles you want here */
 }
+
+
+
 .flex{
   display: flex;
 }
@@ -107,6 +110,17 @@ align-items: start;
 .text-large{
   font-size: xx-large;
   color: black;
+  background-color: #363644;
+  border-color: #1A1A27;
+}
+.text-large:focus{
+   border-color: #1A1A27;
+}
+
+.text-area{
+  border-radius: 5px;
+  box-shadow: 5px;
+
 }
 
 .reset-btn{

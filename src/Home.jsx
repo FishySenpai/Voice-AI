@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import test from "./assets/test.mp3";
 import storedVoices from "./assets/storedVoices.json"
 import AudioPlayer from "./AudioPlayer";
+import WaveSurfer from "wavesurfer.js";
+import Waveform from "./WaveForm";
 const Home = () => {
   const [description, setDescription] = useState();
   const [loginStatus, setLoginStatus] = useState("");
@@ -13,7 +15,7 @@ const Home = () => {
   const [selectedVoice, setSelectedVoice] = useState(storedVoices[0]);
   const [selectVoice, setSelectVoice] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
-  const [epublic, setpublic] = useState("public");
+  const [epublic, setPublic] = useState("public");
   const [eprivate, setPrivate] = useState("private");
   const [togglePrivate, setTogglePrivate] = useState(false);
   const [userAudio, setUserAudio] = useState();
@@ -60,12 +62,13 @@ const Home = () => {
   const handleClick = () => {
     if (loginStatus) {
       setPrivate(epublic);
-      setpublic(eprivate);
+      setPublic(eprivate);
       setTogglePrivate(!togglePrivate);
     } else {
       navigate("/login");
     }
   };
+  
   return (
     <div>
       {console.log(voices)}
@@ -156,7 +159,7 @@ const Home = () => {
       </div>
       <div>{loginStatus}</div>
       <div className="">
-        <div>
+        <div className="text-area">
           <textarea
             className="text-large"
             style={{ width: "600px", height: "500px" }} // Set the desired width and height
@@ -177,6 +180,14 @@ const Home = () => {
             <AudioPlayer audioSrc={userAudio} />
           </div>
         ) : null}
+      </div>
+      <div className="audio-width">
+        <Waveform
+          height={100}
+          waveColor="rgb(200, 0, 200)"
+          progressColor="rgb(100, 0, 100)"
+          url={test}
+        />
       </div>
     </div>
   );

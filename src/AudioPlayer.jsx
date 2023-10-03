@@ -102,12 +102,7 @@ function AudioPlayer({ audioSrc }) {
   const handleVolumeIconMouseLeave = () => {
     setVolumeSliderVisible(false);
   };
-  const wavesurfer = WaveSurfer.create({
-    container: "#waveform",
-    waveColor: "#4F4A85",
-    progressColor: "#383351",
-    url: {test},
-  });
+ 
   return (
     <div className="audio-player relative">
       <div className="flex flex-row">

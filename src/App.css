@@ -109,7 +109,7 @@ align-items: start;
 }
 .text-large{
   font-size: xx-large;
-  color: black;
+  color: white;
   background-color: #363644;
   border-color: #1A1A27;
 }
@@ -120,7 +120,6 @@ align-items: start;
 .text-area{
   border-radius: 5px;
   box-shadow: 5px;
-
 }
 
 .reset-btn{
@@ -150,6 +149,7 @@ align-items: start;
   padding: 2px;
   padding-left: 20px;
   margin-bottom: 4px;
+  color: white;
 }
 /* Add this CSS to style the progress bar */
 .progress-bar {
@@ -181,14 +181,15 @@ align-items: start;
   transform: rotate(-90deg);
   position: absolute;
   right: -45px;
-  bottom: 65px;
+  bottom: 98px;
 }
 .volume-slider {
   width: 100px;
 }
 .volume-btn{
   position: absolute;
-    bottom: -6px;
+  bottom: 62px;
+  left: 485px;
 }
 .progress-bar{
   margin-top: 6px;
@@ -211,4 +212,22 @@ align-items: start;
 .hidden{
   display: none;
 opacity: 0;
+}
+
+.player{
+  display: relative;
+  padding-top: 45px;
+  width: 600px;
+  color: rgb(231, 229, 229);
+  font-family: 'Courier New', Courier, monospace;
+}
+.volume-time{
+position: absolute;
+bottom: 40px;
+right: 500px;
+}
+.volume-svg{
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
 }

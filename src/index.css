@@ -72,3 +72,6 @@ textarea {
   resize: none;
   background-color: white;
 }
+canvas{
+  height: 40px;
+}

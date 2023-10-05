@@ -22,7 +22,7 @@ function AudioControl({ audioSrc }) {
       {isPlaying ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          height="30"
+          height="25px"
           viewBox="0 0 320 512"
           onClick={toggleAudio}
         >
@@ -31,7 +31,7 @@ function AudioControl({ audioSrc }) {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          height="30px"
+          height="25px"
           viewBox="0 0 384 512"
           onClick={toggleAudio}
         >

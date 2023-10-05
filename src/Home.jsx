@@ -73,7 +73,7 @@ const Home = () => {
     <div>
       {console.log(voices)}
       <div className="relative">
-        <div className="px width">
+        <div className="px width relative">
           {console.log(selectedVoice)}
           {selectedVoice ? (
             <div className="flex flex-row box-shadow">
@@ -96,26 +96,28 @@ const Home = () => {
               </div>
 
               <button className="reset-btn" onClick={dropDown}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="25px"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-                    fill="gray"
-                  />
-                </svg>
+                <div className=" dropdown-svg">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="25px"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                      fill="gray"
+                    />
+                  </svg>
+                </div>
               </button>
             </div>
           ) : null}
 
           {selectVoice ? (
-            <ul className="position-dropdown height ulist">
+            <ul className="position-dropdown height ulist ">
               {voices?.slice(0, 30).map((voice) => (
                 <li className="list " key={voice.voice_id}>
                   <div className="flex flex-row">
-                    <div className="">
+                    <div className="pl">
                       <AudioControl audioSrc={voice.preview_url} />
                     </div>
                     <button
@@ -126,7 +128,7 @@ const Home = () => {
                       className="btn-clr align-left"
                     >
                       <div className="flex flex-row ">
-                        <div className="pr clr">{voice.name}</div>
+                        <div className="pr ">{voice.name}</div>
                         <div className="flex flex-row">
                           <div className="pr mr border">
                             {voice.labels.accent}

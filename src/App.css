@@ -60,6 +60,10 @@ padding: 20px;
 .pr{
   padding-right: 20px;
 }
+.pl{
+  padding-left: 20px;
+  padding-top: 8px;
+}
 .mr{
   margin-right: 20px;
 }
@@ -79,18 +83,27 @@ padding: 20px;
   padding: 4px;
 }
 .btn-clr{
-  background-color: white;
+  background-color: #242430;
+  color: white;
 }
 .relative{
   position: relative;
 }
 .position-dropdown{
   position: absolute;
-  top: 40px;
-  left: 0px;
-  background-color: white;
-
+  top: 50px;
+  left: 20px;
+  width: 610px;
+  background-color: #242430;
+  padding-left: 5px;
+  border-radius: 10px;
+  padding: 5px;
   z-index: 20;
+}
+.dropdown-svg{
+  position: absolute;
+  right: 30px;
+  top: 25px;
 }
 .clr{
   color: black;
@@ -124,8 +137,6 @@ align-items: start;
 
 .reset-btn{
   all: initial;
-  margin-left: 105px;
-  margin-bottom: 4px;
 }
 .reset-btn:focus{
   outline: none;

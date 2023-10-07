@@ -10,8 +10,6 @@ const useWavesurfer = (containerRef, options) => {
 
     const ws = WaveSurfer.create({
       ...options,
-      height: 40,
-      barHeight: 1,
       container: containerRef.current,
     });
     

@@ -199,8 +199,8 @@ align-items: start;
 }
 .volume-btn{
   position: absolute;
-  bottom: 62px;
-  left: 485px;
+  bottom: 65px;
+  left: 590px;
 }
 .progress-bar{
   margin-top: 6px;
@@ -227,7 +227,7 @@ opacity: 0;
 
 .player{
   display: relative;
-  padding-top: 45px;
+  padding-top: 15px;
   width: 600px;
   color: rgb(231, 229, 229);
   font-family: 'Courier New', Courier, monospace;
@@ -235,7 +235,7 @@ opacity: 0;
 .volume-time{
 position: absolute;
 bottom: 40px;
-right: 500px;
+right: 490px;
 }
 .volume-svg{
   position: absolute;

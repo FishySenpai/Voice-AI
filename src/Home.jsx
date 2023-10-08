@@ -182,7 +182,7 @@ const Home = () => {
         {loading && !userAudio ? <CircularProgress /> : null}
         {userAudio && !loading ? (
           <Waveform
-            height={40}
+            height={100}
             waveColor="rgb(200, 0, 200)"
             progressColor="rgb(100, 0, 100)"
             url={userAudio}

@@ -10,6 +10,7 @@ const useWavesurfer = (containerRef, options) => {
 
     const ws = WaveSurfer.create({
       ...options,
+      cursorWidth: 0,
       container: containerRef.current,
     });
     

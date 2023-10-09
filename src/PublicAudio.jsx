@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import Waveform from "./WaveForm";
 import axios from "axios";
 const PublicAudio = () => {
   const [data, setData] = useState();
@@ -95,55 +89,33 @@ const PublicAudio = () => {
       console.log(err);
     }
   };
+return (
+  <div>
+    {loading ? (
+      <p>Loading...</p>
+    ) : (
+      <ul>
+        {data.map((item, index) => (
+          <li key={item.text_id}>
+            <div>{item.description}</div>
+            {audioSources[item.text_id] ? (
+              <Waveform
+                height={100}
+                waveColor="rgb(200, 0, 200)"
+                progressColor="rgb(100, 0, 100)"
+                url={audioSources[item.text_id]}
+              />
+            ) : (
+              <p>Your browser does not support the audio element.</p>
+            )}
+            <button onClick={() => Delete(item.text_id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+);
 
-  return (
-    <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>id</TableCell>
-                <TableCell align="right">Text</TableCell>
-                <TableCell align="right">Audio</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((item, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {item.text_id}
-                  </TableCell>
-                  <TableCell align="right">{item.description}</TableCell>
-                  <TableCell>
-                    <audio controls>
-                      {audioSources[item.text_id] ? (
-                        <source
-                          src={audioSources[item.text_id]}
-                          type="audio/mpeg"
-                        />
-                      ) : (
-                        <p>Your browser does not support the audio element.</p>
-                      )}
-                    </audio>
-                  </TableCell>
-
-                  <TableCell align="right">
-                    <button onClick={() => Delete(item.text_id)}>Delete</button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-    </div>
-  );
 };
 
 export default PublicAudio;

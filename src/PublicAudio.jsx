@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Waveform from "./WaveForm";
 import axios from "axios";
+import audio from "./assets/audio.mp3"
 const PublicAudio = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
@@ -91,10 +92,24 @@ const PublicAudio = () => {
   };
 return (
   <div>
+    <div className="examples">
+      <div className="example">
+        <div>Seductive</div>
+        <div>"you're such a good boy" she said, seductively</div>
+        <div>
+          <Waveform
+            height={100}
+            waveColor="rgb(200, 0, 200)"
+            progressColor="rgb(100, 0, 100)"
+            url={audio}
+          />
+        </div>
+      </div>
+    </div>
     {loading ? (
       <p>Loading...</p>
     ) : (
-      <ul>
+      <ul className="examples">
         {data.map((item, index) => (
           <li key={item.text_id}>
             <div>{item.description}</div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Waveform from "./WaveForm";
 import axios from "axios";
 import audio from "./assets/audio.mp3"
+import whispering from "./assets/whispering.mp3";
 import shouting from "./assets/shouting.mp3";
 const PublicAudio = () => {
   const [data, setData] = useState();
@@ -107,7 +108,7 @@ return (
         </div>
       </div>
       <div className="example">
-        <div>Shouting</div>
+        <div>Whispering</div>
         <div>
           Whispering to nervousenes to screaming "Late at night, she heard a
           soft whisper coming from the closet, 'Don't open the door... there's
@@ -115,6 +116,23 @@ return (
           heart pounding with nervousness, and hesitated for a moment, As she
           reached for the doorknob, the whisper turned into a blood-curdling
           scream, 'No! Don't do it!'
+        </div>
+        <div>
+          <Waveform
+            height={100}
+            waveColor="rgb(200, 0, 200)"
+            progressColor="rgb(100, 0, 100)"
+            url={whispering}
+          />
+        </div>
+      </div>
+      <div className="example">
+        <div>Shouting</div>
+        <div>
+          Rising anger, whispering to shouting, “No, you clearly don’t know who
+          you’re talking to, so let me clue you in. I am not in danger, Skyler.
+          I AM the danger. A guy opens his door and gets shot and you think that
+          of me? No. I am the one who knocks!”
         </div>
         <div>
           <Waveform

@@ -46,34 +46,32 @@
   /* Add any other custom styles you want here */
 }
 
-
-
-.flex{
+.flex {
   display: flex;
 }
-.flex-row{
+.flex-row {
   flex-direction: row;
 }
-.px{
-padding: 20px;
+.px {
+  padding: 20px;
 }
-.pr{
+.pr {
   padding-right: 20px;
 }
-.pl{
+.pl {
   padding-left: 20px;
   padding-top: 8px;
 }
-.mr{
+.mr {
   margin-right: 20px;
 }
-.width{
+.width {
   width: 650px;
 }
-.bg{
+.bg {
   background-color: gray;
 }
-.border{
+.border {
   border-radius: 20%;
   border-color: gray;
   background-color: gray;
@@ -82,14 +80,14 @@ padding: 20px;
   font-weight: 500;
   padding: 4px;
 }
-.btn-clr{
+.btn-clr {
   background-color: #242430;
   color: white;
 }
-.relative{
+.relative {
   position: relative;
 }
-.position-dropdown{
+.position-dropdown {
   position: absolute;
   top: 50px;
   left: 20px;
@@ -100,59 +98,56 @@ padding: 20px;
   padding: 5px;
   z-index: 20;
 }
-.dropdown-svg{
+.dropdown-svg {
   position: absolute;
   right: 30px;
   top: 25px;
 }
-.clr{
+.clr {
   color: black;
 }
-.align-left{
+.align-left {
   width: 100%;
   display: block;
-align-items: start;
+  align-items: start;
 }
-.height{
+.height {
   height: 400px;
   overflow-x: auto;
 }
-.flex-col{
+.flex-col {
   flex-direction: column;
 }
-.text-large{
+.text-large {
   font-size: xx-large;
   color: white;
   background-color: #363644;
-  border-color: #1A1A27;
+  border-color: #1a1a27;
 }
-.text-large:focus{
-   border-color: #1A1A27;
+.text-large:focus {
+  border-color: #1a1a27;
 }
 
-.text-area{
+.text-area {
   border-radius: 5px;
   box-shadow: 5px;
 }
 
-.reset-btn{
+.reset-btn {
   all: initial;
 }
-.reset-btn:focus{
+.reset-btn:focus {
   outline: none;
 }
-.btn-h{
+.btn-h {
   height: 35px;
 }
-.list{
-  
+.list {
   all: initial;
 }
-.ulist{
-  
+.ulist {
   padding-inline-start: 0;
   overflow-x: hidden;
-
 }
 .box-shadow {
   box-shadow: 0px 0px 0px 1px rgba(128, 128, 128, 0.5); /* Gray color with 50% opacity */
@@ -164,22 +159,19 @@ align-items: start;
 }
 /* Add this CSS to style the progress bar */
 
-
 .progress {
   height: 100%;
   background-color: #007bff; /* Color of the progress bar */
   border-radius: 4px; /* Rounded corners for the progress bar */
 }
 
-.theme{
+.theme {
   background-color: gray;
 }
-.audio-width{
+.audio-width {
   width: 70vw;
   padding-top: 40px;
 }
-
-
 
 .volume-container {
   transform: rotate(-90deg);
@@ -191,19 +183,18 @@ align-items: start;
   width: 100px;
 }
 
-
-.download-btn{
+.download-btn {
   all: initial;
 }
 .relative {
   position: relative;
 }
-.visible{
+.visible {
   display: block;
 }
-.hidden{
+.hidden {
   display: none;
-opacity: 0;
+  opacity: 0;
 }
 
 /* CSS */
@@ -228,7 +219,6 @@ opacity: 0;
   padding-right: 10px;
 }
 
-
 .player .volume-time {
   display: flex;
   align-items: center;
@@ -240,13 +230,23 @@ opacity: 0;
   align-items: center;
 }
 
-.examples{
+.examples {
   all: initial;
   list-style: none;
-  color: white;
+  color: rgb(212, 216, 221);
+  font-size: 16px;
+  font-family: "Dancing Script", cursive;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
-.example{
+.example {
   background-color: #363644;
   padding: 5px;
   border-radius: 5px;
+}
+.example-title {
+  font-size: x-large;
+  font-weight: 200;
+  color: white;
 }

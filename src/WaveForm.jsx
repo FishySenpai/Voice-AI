@@ -101,7 +101,7 @@ const Waveform = (props) => {
         <div
           className="progress-bar"
           ref={containerRef}
-          style={{ minHeight: "120px" }}
+          style={{ maxHeight: "120px" }}
         />
         <div className="volume-time">
           <div className="flex flex-row">

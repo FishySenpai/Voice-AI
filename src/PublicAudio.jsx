@@ -10,61 +10,61 @@ const PublicAudio = () => {
   const [audioSources, setAudioSources] = useState({});
   const [loginStatus, setLoginStatus] = useState("");
  axios.defaults.withCredentials = true;
-  const checkLogin = async () => {
-    try {
-      const response = await fetch(
-        "https://raspberry-goldfish-tam.cyclic.app/login",
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        }
-      );
-      if (response) {
-        console.log(response);
-        const responseData = await response.json();
-        console.log(responseData);
-        if (responseData.loggedIn == true) {
-          console.log(responseData);
-          setLoginStatus(responseData.name);
-        } else {
-          console.log("no user");
-        }
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    checkLogin();
-  }, []);
-  const all = async () => {
-    try {
-      const res = await fetch("https://raspberry-goldfish-tam.cyclic.app/all");
-      const jsonData = await res.json();
-      console.log(jsonData);
-      setData(jsonData);
-      setLoading(false);
+  // const checkLogin = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://raspberry-goldfish-tam.cyclic.app/login",
+  //       {
+  //         method: "GET",
+  //         headers: { "Content-Type": "application/json" },
+  //         credentials: "include",
+  //       }
+  //     );
+  //     if (response) {
+  //       console.log(response);
+  //       const responseData = await response.json();
+  //       console.log(responseData);
+  //       if (responseData.loggedIn == true) {
+  //         console.log(responseData);
+  //         setLoginStatus(responseData.name);
+  //       } else {
+  //         console.log("no user");
+  //       }
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+  // useEffect(() => {
+  //   checkLogin();
+  // }, []);
+  // const all = async () => {
+  //   try {
+  //     const res = await fetch("https://raspberry-goldfish-tam.cyclic.app/all");
+  //     const jsonData = await res.json();
+  //     console.log(jsonData);
+  //     setData(jsonData);
+  //     setLoading(false);
 
-      // Calculate audio sources and store them
-      const sources = {};
-      jsonData.forEach((item) => {
-        if (item.audioData && item.audioData.data) {
-          sources[item.text_id] = bufferToDataUrl(
-            item.audioData.data,
-            "audio/mpeg"
-          );
-        }
-      });
-      setAudioSources(sources);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     // Calculate audio sources and store them
+  //     const sources = {};
+  //     jsonData.forEach((item) => {
+  //       if (item.audioData && item.audioData.data) {
+  //         sources[item.text_id] = bufferToDataUrl(
+  //           item.audioData.data,
+  //           "audio/mpeg"
+  //         );
+  //       }
+  //     });
+  //     setAudioSources(sources);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  useEffect(() => {
-    all();
-  }, []);
+  // useEffect(() => {
+  //   all();
+  // }, []);
 
   //audio data needs to be array buffer for function to work
   function bufferToDataUrl(buffer, mimeType) {
@@ -95,8 +95,8 @@ const PublicAudio = () => {
 return (
   <div>
     <div className="examples">
-      <div className="example">
-        <div>Seductive</div>
+      <div className="">
+        <div className="example-title">Seductive</div>
         <div>"you're such a good boy" she said, seductively</div>
         <div>
           <Waveform
@@ -107,8 +107,8 @@ return (
           />
         </div>
       </div>
-      <div className="example">
-        <div>Whispering</div>
+      <div className="">
+        <div className="example-title">Whispering</div>
         <div>
           Whispering to nervousenes to screaming "Late at night, she heard a
           soft whisper coming from the closet, 'Don't open the door... there's
@@ -126,25 +126,27 @@ return (
           />
         </div>
       </div>
-      <div className="example">
-        <div>Shouting</div>
+      <div>
+        <div className="example-title">Shouting</div>
         <div>
-          Rising anger, whispering to shouting, “No, you clearly don’t know who
-          you’re talking to, so let me clue you in. I am not in danger, Skyler.
-          I AM the danger. A guy opens his door and gets shot and you think that
-          of me? No. I am the one who knocks!”
-        </div>
-        <div>
-          <Waveform
-            height={100}
-            waveColor="rgb(200, 0, 200)"
-            progressColor="rgb(100, 0, 100)"
-            url={shouting}
-          />
+          <div>
+            Rising anger, whispering to shouting, “No, you clearly don't know
+            who you're talking to, so let me clue you in. I am not in danger,
+            Skyler. I AM the danger. A guy opens his door and gets shot and you
+            think that of me? No. I am the one who knocks!”
+          </div>
+          <div className="">
+            <Waveform
+              height={100}
+              waveColor="rgb(200, 0, 200)"
+              progressColor="rgb(100, 0, 100)"
+              url={shouting}
+            />
+          </div>
         </div>
       </div>
     </div>
-    {loading ? (
+    {/* {loading ? (
       <p>Loading...</p>
     ) : (
       <ul className="examples">
@@ -165,7 +167,7 @@ return (
           </li>
         ))}
       </ul>
-    )}
+    )} */}
   </div>
 );
 

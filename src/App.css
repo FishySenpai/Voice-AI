@@ -156,6 +156,7 @@
   padding-left: 20px;
   margin-bottom: 4px;
   color: white;
+  font-size: 14px;
 }
 /* Add this CSS to style the progress bar */
 
@@ -210,6 +211,7 @@
 .player .volume-btn {
   /* Adjust this width as needed */
   width: 10px;
+  padding-top: 19px;
 }
 .player .progress-bar {
   flex-grow: 1; /* Allow the progress bar to grow and take up available space */
@@ -223,6 +225,7 @@
   display: flex;
   align-items: center;
   gap: 20px; /* Adjust this value for spacing */
+  padding-top: 18px;
 }
 
 .player .flex {

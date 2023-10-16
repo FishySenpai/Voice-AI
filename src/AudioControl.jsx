@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function AudioControl({ audioSrc }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -13,9 +13,21 @@ function AudioControl({ audioSrc }) {
     setIsPlaying(!isPlaying);
   };
 
+  useEffect(() => {
+    // When audioSrc prop changes, update the audio source and play/pause as needed
+    audioRef.current.src = audioSrc;
+    audioRef.current.volume = 0.5;
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [audioSrc]);
+
   const handleAudioEnded = () => {
     setIsPlaying(false);
   };
+
 
   return (
     <div>
@@ -40,7 +52,7 @@ function AudioControl({ audioSrc }) {
       )}
 
       <div>
-        <audio ref={audioRef} onEnded={handleAudioEnded}>
+        <audio ref={audioRef} onEnded={handleAudioEnded} >
           <source src={audioSrc} />
           Your browser does not support the audio element.
         </audio>

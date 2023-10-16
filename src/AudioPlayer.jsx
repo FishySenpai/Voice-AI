@@ -16,7 +16,7 @@ function AudioPlayer({ audioSrc }) {
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("durationchange", handleDurationChange);
     audio.addEventListener("ended", handleAudioEnded);
-
+  setVolume(0.5);
     // Clean up event listeners on unmount
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
@@ -105,6 +105,7 @@ function AudioPlayer({ audioSrc }) {
  
   return (
     <div className="audio-player relative">
+      {console.log(volume)}
       <div className="flex flex-row">
         <div className="volume-btn">
           <button className="reset-btn " onClick={togglePlayPause}>
@@ -127,13 +128,14 @@ function AudioPlayer({ audioSrc }) {
             )}
           </button>
         </div>
-        
+
         <div ref={progressRef} className="progress-bar" onClick={handleSeek}>
           <div
             className="progress"
             style={{ width: calculateProgressBarWidth() }}
           />
         </div>
+
         <div
           className="flex flex-col relative volume"
           onMouseEnter={handleVolumeIconHover}

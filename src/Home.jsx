@@ -4,7 +4,7 @@ import { TextField, Button, CircularProgress } from "@mui/material";
 import AudioControl from "./AudioControl";
 import { useNavigate } from "react-router-dom";
 import test from "./assets/test.mp3";
-import storedVoices from "./assets/storedVoices.json"
+import storedVoices from "./assets/storedVoices.json";
 import AudioPlayer from "./AudioPlayer";
 import WaveSurfer from "wavesurfer.js";
 import Waveform from "./WaveForm";
@@ -33,11 +33,14 @@ const Home = () => {
     let id = null;
     try {
       const body = { description, id, voiceId };
-      const response = await fetch("https://raspberry-goldfish-tam.cyclic.app/createAudio", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "https://raspberry-goldfish-tam.cyclic.app/createAudio",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       const jsonData = await response.json();
       bufferToDataUrl(jsonData.data, "audio/mpeg");
       console.log(jsonData);
@@ -56,7 +59,7 @@ const Home = () => {
 
     // Create a data URL from the Blob
     console.log(URL.createObjectURL(blob));
-   setUserAudio(URL.createObjectURL(blob))
+    setUserAudio(URL.createObjectURL(blob));
   }
 
   const handleClick = () => {
@@ -68,7 +71,10 @@ const Home = () => {
       navigate("/login");
     }
   };
-  
+ const handleVoiceSelection = (voice) => {
+   setSelectedVoice(voice);
+   dropDown();
+ };
   return (
     <div>
       {console.log(voices)}
@@ -82,7 +88,7 @@ const Home = () => {
               </div>
               <div className="pr">{selectedVoice.name}</div>
 
-              <div className="pr mr border btn-h">
+              <div className=" mr border btn-h">
                 {selectedVoice.labels.accent}
               </div>
               <div className="pr mr border btn-h">
@@ -122,24 +128,36 @@ const Home = () => {
                     </div>
                     <button
                       onClick={() => {
-                        setSelectedVoice(voice);
-                        dropDown();
+                        handleVoiceSelection(voice);
                       }}
                       className="btn-clr align-left"
                     >
                       <div className="flex flex-row ">
                         <div className="pr ">{voice.name}</div>
                         <div className="flex flex-row">
-                          <div className="pr mr border">
-                            {voice.labels.accent}
-                          </div>
-                          <div className="pr mr border">{voice.labels.age}</div>
-                          <div className="pr mr border">
-                            {voice.labels.gender}
-                          </div>
-                          <div className="pr mr border">
-                            {voice.labels.description}
-                          </div>
+                          {voice.labels.accent ? (
+                            <div className="pr mr border">
+                              {voice.labels.accent}
+                            </div>
+                          ) : null}
+
+                          {voice.labels.age ? (
+                            <div className="pr mr border">
+                              {voice.labels.age}
+                            </div>
+                          ) : null}
+
+                          {voice.labels.gender ? (
+                            <div className="pr mr border">
+                              {voice.labels.gender}
+                            </div>
+                          ) : null}
+
+                          {voice.labels.description ? (
+                            <div className="pr mr border">
+                              {voice.labels.description}
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </button>

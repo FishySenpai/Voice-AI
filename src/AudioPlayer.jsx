@@ -16,7 +16,6 @@ function AudioPlayer({ audioSrc }) {
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("durationchange", handleDurationChange);
     audio.addEventListener("ended", handleAudioEnded);
-  setVolume(0.5);
     // Clean up event listeners on unmount
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);

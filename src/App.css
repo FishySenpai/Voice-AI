@@ -252,4 +252,14 @@
   font-size: x-large;
   font-weight: 200;
   color: white;
+  padding-bottom: 10px;
+}
+.example-border{
+  border-left: 3px solid #2e2f30;
+  margin-left: 10px;
+
+}
+.example-description {
+  padding: 5px;
+  padding-left: 15px;
 }

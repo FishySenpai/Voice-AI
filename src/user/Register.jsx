@@ -16,11 +16,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
+
 const customTheme = createTheme({
   palette: {
     background: {
-      default: "#eeeeee", // Replace with your desired gray color code
+      default: "#eeeeee", // Replace with your desired background color code
     },
+  },
+  typography: {
+    body1: {
+      color: "#ffff",
+    },
+    // You can define more text elements and their colors as needed
   },
 });
 

@@ -166,18 +166,6 @@ const Home = () => {
               ))}
             </ul>
           ) : null}
-          <div className="flex flex-col">
-            <button
-              onClick={() => {
-                setTogglePrivate(!togglePrivate);
-              }}
-            >
-              {epublic}
-            </button>
-            {togglePrivate ? (
-              <button onClick={handleClick}>{eprivate}</button>
-            ) : null}
-          </div>
         </div>
       </div>
       <div>{loginStatus}</div>
@@ -186,7 +174,7 @@ const Home = () => {
           <textarea
             className="text-large"
             style={{ width: "600px", height: "500px" }} // Set the desired width and height
-            placeholder="Enter text"
+            placeholder={`Enter the text you want ${selectedVoice?.name} to say`}
             onChange={(e) => {
               setDescription(e.target.value);
             }}

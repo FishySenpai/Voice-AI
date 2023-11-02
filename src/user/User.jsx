@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import Waveform from "../WaveForm";
 const User = () => {
   const [description, setDescription] = useState();
   const [data, setData] = useState();
@@ -52,10 +46,7 @@ const User = () => {
       const sources = {};
       jsonData.forEach((item) => {
         if (item.audioData && item.audioData.data) {
-          sources[item.id] = bufferToDataUrl(
-            item.audioData.data,
-            "audio/mpeg"
-          );
+          sources[item.id] = bufferToDataUrl(item.audioData.data, "audio/mpeg");
         }
       });
       setAudioSources(sources);
@@ -70,11 +61,11 @@ const User = () => {
     }
   }, []);
 
-   useEffect(() => {
-     if (loginStatus.id) {
-       all(loginStatus.id);
-     }
-   }, [loginStatus]);
+  useEffect(() => {
+    if (loginStatus.id) {
+      all(loginStatus.id);
+    }
+  }, [loginStatus]);
   function bufferToDataUrl(buffer, mimeType) {
     // Convert the Buffer to a Uint8Array
     const uint8Array = new Uint8Array(buffer);
@@ -127,65 +118,24 @@ const User = () => {
 
   return (
     <div>
-      <div>{loginStatus.name}</div>
-      <div>
-        <input
-          type="text"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-        />
-        <button onClick={Fetch}>Enter</button>
-      </div>
-      <div>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>id</TableCell>
-                  <TableCell align="right">Text</TableCell>
-                  <TableCell align="right">Audio</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data?.map((item, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {item.id}
-                    </TableCell>
-                    <TableCell align="right">{item.description}</TableCell>
-                    <TableCell>
-                      <audio controls>
-                        {audioSources[item.id] ? (
-                          <source
-                            src={audioSources[item.id]}
-                            type="audio/mpeg"
-                          />
-                        ) : (
-                          <p>
-                            Your browser does not support the audio element.
-                          </p>
-                        )}
-                      </audio>
-                    </TableCell>
-
-                    <TableCell align="right">
-                      <button onClick={() => Delete(item.id)}>
-                        Delete
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        )}
+      <div className="examples">
+        <div className="">
+          {data?.map((item, index) => (
+            <div>
+              <div className="example-border">
+                <div className="example-description">{item.description}</div>
+              </div>
+              <div>
+                <Waveform
+                  height={80}
+                  waveColor="rgb(200, 0, 200)"
+                  progressColor="rgb(100, 0, 100)"
+                  url={audioSources[item.id]}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

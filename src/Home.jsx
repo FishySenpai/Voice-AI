@@ -26,11 +26,40 @@ const Home = () => {
   const dropDown = () => {
     setSelectVoice(!selectVoice);
   };
+    const checkLogin = async () => {
+      try {
+        const response = await fetch(
+          "https://raspberry-goldfish-tam.cyclic.app/login",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          }
+        );
+        if (response) {
+          console.log(response);
+          const responseData = await response.json();
+          console.log(responseData);
+          if (responseData.loggedIn == true) {
+            console.log(responseData);
+            setLoginStatus(responseData);
+          } else {
+            console.log("no user");
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    useEffect(() => {
+      checkLogin();
+    }, []);
+  
   const Fetch = async () => {
     setLoading(true);
     console.log(description);
     let voiceId = selectedVoice?.voice_id;
-    let id = null;
+    let id = loginStatus.id;
     try {
       const body = { description, id, voiceId };
       const response = await fetch(
@@ -168,7 +197,7 @@ const Home = () => {
           ) : null}
         </div>
       </div>
-      <div>{loginStatus}</div>
+      <div>{loginStatus.name}</div>
       <div className="">
         <div className="text-area">
           <textarea

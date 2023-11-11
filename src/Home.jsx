@@ -210,7 +210,7 @@ const Home = () => {
           />
         </div>
         <Button variant="contained" color="secondary" onClick={Fetch}>
-          Enter
+          Delete
         </Button>
       </div>
       <div>
